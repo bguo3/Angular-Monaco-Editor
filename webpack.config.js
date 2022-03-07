@@ -10,7 +10,7 @@ module.exports = (env, argv) => ({
   },
   mode: "development",
   output: {
-    filename: "[name].bundle1.js",
+    filename: "[name].bundle.js",
     path: dist,
   },
   resolve: {
