@@ -4,12 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "rimraf dist && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
   "private": true,
   "dependencies": {
+    "@angular-builders/custom-webpack": "^13.1.0",
     "@angular/animations": "~13.2.0",
     "@angular/common": "~13.2.0",
     "@angular/compiler": "~13.2.0",
@@ -18,8 +19,12 @@
     "@angular/platform-browser": "~13.2.0",
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
+    "monaco-editor-core": "^0.32.1",
+    "monaco-languageclient": "^0.17.3",
+    "reconnecting-websocket": "^4.4.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
+    "vscode-ws-jsonrpc": "^0.2.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
