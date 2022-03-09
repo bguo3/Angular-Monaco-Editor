@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-// import {
-  // CloseAction,
-  // createConnection,
-  // ErrorAction,
-  // MessageConnection,
-  // MonacoLanguageClient,
-  // MonacoServices,
-// } from 'monaco-languageclient';
+import {
+  CloseAction,
+  createConnection,
+  ErrorAction,
+  MessageConnection,
+  MonacoLanguageClient,
+  MonacoServices,
+} from 'monaco-languageclient';
 const ReconnectingWebSocket = require('reconnecting-websocket');
 import { listen } from 'vscode-ws-jsonrpc';
 import * as monaco from 'monaco-editor-core';
@@ -50,20 +50,20 @@ Hello you!`;
       ),
     });
 
-    // MonacoServices.install(editor as any);
+    MonacoServices.install(editor as any);
 
-    // const url = this.createUrl('localhost', '4389', '/');
-    // const webSocket = this.createWebSocket(url);
-    // listen({
-    //   webSocket,
-    //   onConnection: (connection: any) => {
-    //     //must cast to any
-    //     // create and start the language client
-    //     const languageClient = this.createLanguageClient(connection);
-    //     const disposable = languageClient.start();
-    //     connection.onClose(() => disposable.dispose());
-    //   },
-    // });
+    const url = this.createUrl('localhost', '4389', '/');
+    const webSocket = this.createWebSocket(url);
+    listen({
+      webSocket,
+      onConnection: (connection: any) => {
+        //must cast to any
+        // create and start the language client
+        const languageClient = this.createLanguageClient(connection);
+        const disposable = languageClient.start();
+        connection.onClose(() => disposable.dispose());
+      },
+    });
   }
 
   createUrl(host: any, port: any, path: any): string {
@@ -72,40 +72,40 @@ Hello you!`;
     }://${host}:${port}${path}`;
   }
 
-  // createWebSocket(url: string): WebSocket {
-  //   const socketOptions = {
-  //     maxReconnectionDelay: 10000,
-  //     minReconnectionDelay: 1000,
-  //     reconnectionDelayGrowFactor: 1.3,
-  //     connectionTimeout: 10000,
-  //     maxRetries: Infinity,
-  //     debug: false,
-  //   };
-  //   return new ReconnectingWebSocket(url, [], socketOptions);
-  // }
+  createWebSocket(url: string): WebSocket {
+    const socketOptions = {
+      maxReconnectionDelay: 10000,
+      minReconnectionDelay: 1000,
+      reconnectionDelayGrowFactor: 1.3,
+      connectionTimeout: 10000,
+      maxRetries: Infinity,
+      debug: false,
+    };
+    return new ReconnectingWebSocket(url, [], socketOptions);
+  }
 
-  // createLanguageClient(connection: MessageConnection): MonacoLanguageClient {
-  //   return new MonacoLanguageClient({
-  //     name: 'Sample Language Client',
-  //     clientOptions: {
-  //       // use a language id as a document selector
-  //       documentSelector: ['json'],
-  //       // disable the default error handler
-  //       errorHandler: {
-  //         error: () => ErrorAction.Continue,
-  //         closed: () => CloseAction.DoNotRestart,
-  //       },
-  //     },
-  //     // create a language client connection from the JSON RPC connection on demand
-  //     connectionProvider: {
-  //       get: (errorHandler, closeHandler) => {
-  //         return Promise.resolve(
-  //           createConnection(connection, errorHandler, closeHandler)
-  //         );
-  //       },
-  //     },
-  //   });
-  // }
+  createLanguageClient(connection: MessageConnection): MonacoLanguageClient {
+    return new MonacoLanguageClient({
+      name: 'Sample Language Client',
+      clientOptions: {
+        // use a language id as a document selector
+        documentSelector: ['json'],
+        // disable the default error handler
+        errorHandler: {
+          error: () => ErrorAction.Continue,
+          closed: () => CloseAction.DoNotRestart,
+        },
+      },
+      // create a language client connection from the JSON RPC connection on demand
+      connectionProvider: {
+        get: (errorHandler, closeHandler) => {
+          return Promise.resolve(
+            createConnection(connection, errorHandler, closeHandler)
+          );
+        },
+      },
+    });
+  }
 
   getGuid() {
     const s4 = () =>

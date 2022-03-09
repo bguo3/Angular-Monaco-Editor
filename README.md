@@ -1,5 +1,14 @@
-PS C:\Work\WebProject\DSL\Angular-Monaco-Editor> ng build
-⠹ Generating browser application bundles (phase: setup)...
-./src/main.ts:4:0-45 - Error: Module not found: Error: Can't resolve './app/app.module' in 'C:\Work\WebProject\DSL\Angular-Monaco-Editor\src'
+intergrate with angular13 and webpack5 is fail.
 
-./src/main.ts:5:0-57 - Error: Module not found: Error: Can't resolve './environments/environment' in 'C:\Work\WebProject\DSL\Angular-Monaco-Editor\src'
+Can serve but error:
+messageReader.js:10 Uncaught ReferenceError: Buffer is not defined
+    at Object.11502 (messageReader.js:10:1)
+    at __webpack_require__ (bootstrap:19:1)
+    at Object.61573 (main.js:37:25)
+    at __webpack_require__ (bootstrap:19:1)
+    at Object.85026 (index.js:10:10)
+    at __webpack_require__ (bootstrap:19:1)
+    at Module.55041 (main.js:16:75)
+    at __webpack_require__ (bootstrap:19:1)
+    at Module.36747 (app.component.html:1:87)
+    at __webpack_require__ (bootstrap:19:1)
